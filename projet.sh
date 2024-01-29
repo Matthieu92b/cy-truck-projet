@@ -1,23 +1,32 @@
 #!/bin/bash
 
 if [ "$1" = "-d2" ]; then
-awk -F ';' '{total[$6]+=$5} END { for(i in total) print total[i],i}' data.csv | sort -k1nr | head -n 10 > test.csv
-gedit test.csv
-gnuplot -persist <<- EOF
-	set terminal png size 1000,1000
-	set output 'graph.png'
-	set title 'Graphique des données'
-	set xlabel 'Etiquettes'
-	set ylabel ' Valeurs'
-	set style data histograms
-	set boxwidth 0.8
-	set xrange[0.5:*]
-	set yrange[0.5:*]
-	set style fill solid border -1
-	plot 'test.csv' using 1:xtic(2) with boxes title 'Données'
-EOF
-touch graph.png
+    awk -F ';' '{total[$6]+=$5} END { for(i in total) print total[i],i}' data.csv | sort -k1nr | head -n 10 > test.csv
 
+
+    gnuplot -persist <<-EOF
+        set terminal png size 1000,1000
+        
+        set output 'graph.png'
+        set title 'Graphique des données'
+        #set x2tics rotate
+        #set ytics rotate
+        #set ytics add("valeurs" )
+        #set xlabel 'Valeurs'
+        set ylabel 'Etiquettes'
+        set style data histograms
+        set boxwidth 0.8
+        set yrange [0.5:*]
+        set xrange [0:*]
+        set style fill solid border -1
+        
+
+        plot 'test.csv' using 1:xticlabels(2) with boxes title 'Données'
+EOF
+
+    convert -rotate 90  graph.png Graphreverse.png
+    rm graph.png  # Supprimer l'ancien fichier graph.png si nécessaire
+   
 fi
 
 if [ "$1" = "-l" ]; then
@@ -41,5 +50,12 @@ if [ "$1" = "-t" ]; then
 	gcc -o exe traitementT.c > tmp.txt
 	./exe
 	
+	
+fi
+
+if [ "$1" = "-s" ];then 
+	rm exo
+	gcc -o exo traiementS.c > tmp2.txt
+	./exo
 	
 fi
