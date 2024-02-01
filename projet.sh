@@ -47,15 +47,14 @@ fi
 
 if [ "$1" = "-t" ]; then
 	
-	gcc -o exe traitementT.c > tmp.txt
-	./exe
+	make all
+	./exec -t >tmp3.txt
 	
 	
 fi
 
 if [ "$1" = "-s" ];then 
-	rm exo
-	gcc -o exo traiementS.c > tmp2.txt
-	./exo
+	make all
+	./exec -s > tmp4.txt
 	
 fi
