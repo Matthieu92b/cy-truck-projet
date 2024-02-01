@@ -198,7 +198,7 @@ int main_S() {
 }
 
 int main(int argc, char **argv) {
-printf("debut %s\n",argv[1]);
+//printf("debut %s\n",argv[1]);
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <option>\n", argv[0]);
         return 1;
@@ -206,12 +206,12 @@ printf("debut %s\n",argv[1]);
         else {
     
         if (strcmp(argv[1], "-s") == 0) {
-        printf("debut S\n");
+        
          main_S();
          }
          else if (strcmp(argv[1], "-t") == 0) {
          
-           printf("debut T\n");
+          
            main_T();
          }
          else {
@@ -220,5 +220,3 @@ printf("debut %s\n",argv[1]);
          }
      
      }
-     
-
