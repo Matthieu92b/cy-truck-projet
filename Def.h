@@ -1,7 +1,4 @@
-//tratitement t
-#define MAX_LINE_SIZE 1024
-#define MAX_10PREMIERE_VILLES 10
-#define MAX_50PREMIER_TRAJETS 50
+
 
 
 
@@ -56,7 +53,7 @@ typedef struct Arbre {
 
 
 typedef Arbre* pArbre;
-
+//on utilise extern sinon cela nous fait une erreur de commande multiple
 extern Ville  *premiere[];
 extern Trajet premier[];
 
@@ -98,7 +95,3 @@ void AfficherResultat_S();
 void freeArbre_T(pArbre a) ;
 
 void freeArbre_S(pArbre a) ;
-
-
-
-
