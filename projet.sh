@@ -6,7 +6,6 @@ IMAGE_DIR="images"
 TEMP_DIR="temp"
 DEMO_DIR="demo"
 
-
 # Fonction qui indique les touches à utiliser 
 display_help() {
 	echo "Pour éxécuter écrire $0 <nom_du_fichier_csv> [-h] [-d1] [-d2] [-l] [-t] [-s]"
@@ -60,6 +59,7 @@ elif [ -z "$(find "$IMAGE_DIR" -maxdepth 0 -type d -empty 2>/dev/null)" ]; then
 	TEMP_DIR="$dossier_parent/temp"
     	# deplacer les éléments du dossier image dans le dossier temps
     	mv "$IMAGE_DIR"/* "$TEMP_DIR"
+    	echo "Les éxécutions précedentes sont dans le dossier temp"
 fi
 
 
@@ -105,8 +105,9 @@ for arg in "${@:2}"; do
 		plot 'test_d1.csv' using 1:xtic(concat_name(2)) with boxes notitle lc rgb '#00FF00' axes x1y2
 	EOF
 	#on fait notre graphique a l'envers pour pouvoir faire une rota et donc obtenir un graph horizontal. De plus , on a crée une fonction qui permet de concatener une chaine de caractère afin d'afficher le prenom et le nom
-	touch graph.png
+	
 	convert 'graphique_d1-r.png' -rotate 90 'graphique_d1.png' 
+	
 	mv 'graphique_d1-r.png' "$DEMO_DIR/graphique_d1-r.png"
 	mv 'graphique_d1.png' "$IMAGE_DIR/graphique_d1.png"
     	mv 'test_d1.csv' "$DEMO_DIR/test_d1.csv"
@@ -115,6 +116,9 @@ for arg in "${@:2}"; do
 	duration=$((end_time - start_time))
 	# Affichage du temps d'exécution
 	echo "Durée totale d'exécution : $duration secondes"
+	echo "Le graphique d1 est dans le dossier image"
+	
+	
 	;;
         -d2)
         # Temps de début
@@ -145,7 +149,7 @@ for arg in "${@:2}"; do
 		plot 'test_d2.csv' using 1:xtic(concat_name(2)) with boxes notitle lc rgb '#00FF00' axes x1y2
 	EOF
 	#meme chose que le graph d1
-	touch graph.png
+	
 	convert 'graphique_d2-r.png' -rotate 90 'graphique_d2.png' 
 	mv 'graphique_d2.png' "$IMAGE_DIR/graphique_d2.png"
     	mv 'test_d2.csv' "$DEMO_DIR/test_d2.csv"
@@ -155,6 +159,7 @@ for arg in "${@:2}"; do
 	duration=$((end_time - start_time))
 	# Affichage du temps d'exécution
 	echo "Durée totale d'exécution : $duration secondes"
+	echo "Le graphique d2 est dans le dossier image"
 	;;
         -l)
         # Temps de début
@@ -185,6 +190,7 @@ for arg in "${@:2}"; do
 	duration=$((end_time - start_time))
 	# Affichage du temps d'exécution
 	echo "Durée totale d'exécution : $duration secondes"
+	echo "Le graphique l est dans le dossier image"
 	;;
         -t)
         # Temps de début
@@ -246,6 +252,7 @@ for arg in "${@:2}"; do
 	duration=$((end_time - start_time))
 	# Affichage du temps d'exécution
 	echo "Durée totale d'exécution : $duration secondes"
+	echo "Le graphique t est dans le dossier image"
 	;;
         -s)
         # Temps de début
@@ -304,6 +311,7 @@ for arg in "${@:2}"; do
 	# Affichage du temps d'exécution
 	echo "Durée totale d'exécution : $duration secondes"
 	#la on n'arrivait pas a remplir l'espace entre les courbes min et max (meme en creant une seule fonction), ducoup on a reussi a trouver une alternative en remplissant toute la partie en dessous de la courbe max (avec filledcurves above) puis en remplissant toute la partie en dessous de la courbe min en blanc (toujours avec la meme fonction) afin de se rapprocher le plus possible du graphique donnée. Le seul probleme de cette methode c'est que ça remplit tout ce qu'il y a en dessous en blanc meme les petites barres sur l'axe des x.
+	echo "Le graphique s est dans le dossier image"
          ;;
         *)
          echo "Option inconnue : $arg"
@@ -312,9 +320,3 @@ for arg in "${@:2}"; do
          ;;
     esac
 done
-
-
-
-
-
-
