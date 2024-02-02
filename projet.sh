@@ -214,7 +214,7 @@ for arg in "${@:2}"; do
     		echo "Erreur : L'exécution du programme a échoué."
     		exit 1
 	fi
-	head -n2 fichier_t.txt | tail -n1 | sed 's/->/->\n/g' | sed -e 's/\[//g' -e 's/\]//g' -e 's/->//g'  | head -n10  | sort -k1 > Données_graph_t.txt
+	head -n2 fichier_t.txt | tail -n1 | sed 's/->/->\n/g' | sed -e 's/\[//g' -e 's/\]//g' -e 's/->//g'  | head -n10 | sort -k1 > Données_graph_t.txt
 	#traitement du fichier_t afin d'obtenir un fichier plus facile a travailler , a noter que la fonction sed permet de supprimer ou de remplacer un caractere
 	gnuplot -persist <<- 'EOF'
     		set terminal pngcairo enhanced font 'arial,12' size 1200, 1000
@@ -239,7 +239,8 @@ for arg in "${@:2}"; do
 	EOF
 	mv 'graphique_t.png' "$IMAGE_DIR/graphique_t.png"
     	mv 'Données_graph_t.txt' "$DEMO_DIR/Données_graph_t.txt"
-     	mv *.c *.h makefile "$PROG_DIR"
+    	mv 'fichier_t.txt' "$DEMO_DIR/fichier_t.txt"
+     	mv *.c *.h *.o makefile "$PROG_DIR"
   	# Temps de fin
 	end_time=$(date +%s)
 	duration=$((end_time - start_time))
@@ -257,6 +258,7 @@ for arg in "${@:2}"; do
     		dossier_parent2="$(dirname "$PROG_DIR")"
     		mv "$PROG_DIR"/* "$dossier_parent2"
    	fi
+   	rm ./exec
  	if [ ! -f ./exec ]; then
     		echo "Compilation de l'exécutable C en cours..."
     		make all 
@@ -287,14 +289,15 @@ for arg in "${@:2}"; do
     		set xlabel 'ROUTE ID'
     		set ylabel 'DISTANCE (Km)'
     		set y2label ' '
-		datafile = 'Donnees_graph_s.txt'
+		datafile = 'Données_graph_s.txt'
 		plot datafile using 4:xtic(1) title 'Max' with filledcurves above lc rgb '#90EE90', \
      		datafile using 2:xtic(1) title 'Min' with filledcurves above lc rgb '#FFFFFF', \
      		datafile using 3:xtic(1) title 'Moyenne' with lines lc rgb '#000000'
 	EOF
 	mv 'graphique_s.png' "$IMAGE_DIR/graphique_s.png"
     	mv 'Données_graph_s.txt' "$DEMO_DIR/Données_graph_s.txt"
-     	mv *.c *.h makefile "$PROG_DIR"
+    	mv 'fichier_s.txt' "$DEMO_DIR/fichier_s.txt"
+     	mv *.c *.h *.o makefile "$PROG_DIR"
      	# Temps de fin
 	end_time=$(date +%s)
 	duration=$((end_time - start_time))
