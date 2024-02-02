@@ -204,8 +204,12 @@ for arg in "${@:2}"; do
     		dossier_parent3="$(dirname "$PROG_DIR")"
     		mv "$PROG_DIR"/* "$dossier_parent3"
    	fi
-   	rm ./exec
-	# Vérification de la présence de l'exécutable C
+   	# Vérification de la présence de l'exécutable C
+	if [ -e "exec" ]; then
+    		# Supprimer le fichier s'il existe
+    		rm "exec"
+   	fi
+	
 	if [ ! -f exec ]; then
     		echo "Compilation de l'exécutable C en cours..."
     		make all
@@ -265,7 +269,12 @@ for arg in "${@:2}"; do
     		dossier_parent2="$(dirname "$PROG_DIR")"
     		mv "$PROG_DIR"/* "$dossier_parent2"
    	fi
-   	rm ./exec
+   	
+	if [ -e "exec" ]; then
+    		
+    		rm "exec"
+    	fi
+   	
  	if [ ! -f ./exec ]; then
     		echo "Compilation de l'exécutable C en cours..."
     		make all 
