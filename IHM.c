@@ -7,7 +7,7 @@
 
 
 
-
+// fonction qui va afficher les 10 premieres villes ou on passe le plus souvent 
 void AfficherResultat_T() {
    	printf("Affichage des resultats\n");
     	for (int i = 0; i < MAX_10PREMIERE_VILLES+1; i++) {
@@ -18,7 +18,7 @@ void AfficherResultat_T() {
     	printf("\n");
 }
 
-
+// fonction qui va afficher les distances_max min et moyenne de villes
 void AfficherResultat_S(){
 	printf("Affichage des resultats\n");
         for (int i=0; i<50;i++){
@@ -26,7 +26,7 @@ void AfficherResultat_S(){
        	}
         printf("\n");
 }
-
+//liberation memoire arbre pour traitement t
 void freeArbre_T(pArbre a) {
 	Route *ptrroute,*ptrR;
 	Etape *ptretape,*ptrE;
@@ -50,7 +50,7 @@ void freeArbre_T(pArbre a) {
         	free(a);
     	}
 }
-
+//liberation memoire arbre pour traitement s
 void freeArbre_S(pArbre a) {
 	Etape *ptrE, *ptretape;
     	if (a != NULL) {
@@ -66,4 +66,3 @@ void freeArbre_S(pArbre a) {
         	free(a);
     	}
 }
-
