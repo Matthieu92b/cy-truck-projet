@@ -13,4 +13,3 @@ void AfficherResultat_S();
 void freeArbre_T(pArbre a);
 
 void freeArbre_S(pArbre a);
-
