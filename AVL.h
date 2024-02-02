@@ -21,4 +21,3 @@ pArbre equilibreAVL(pArbre a);
 pArbre insertVille(pArbre a, char* nomVilleCourante, int RouteIdCourante,int stepIdcourant ,bool premiereEtape, int *h);
 
 pArbre insertRoute(pArbre a,int RouteIdCourante,int stepIdcourant, float distance, int *h);
-
